@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Adherents Management Application</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+</head>
+<body>
+<header>
+    <div th:replace="navbar::navbar"></div>
+</header>
+<div class="row">
+    <!-- <div class="alert alert-success" *ngIf='message'>{{message}}</div> -->
+
+    <div class="container">
+        <h3 class="text-center">List of Emrunts</h3>
+        <hr>
+        <div class="container text-left">
+
+            <a href="#" class="btn btn-success" th:href="@{/newemprunt}">Add New Emprunt</a>
+
+        </div>
+        <br>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>CIN</th>
+                <th>ISBN</th>
+                <th>IdExempalaire</th>
+                <th>Date Emprunt</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="emprunt : ${emprunts}">
+                <td th:text="${emprunt.adherant.cin}" />
+                <td th:text="${emprunt.getExemplaire().getLivre().isbn}" />
+                <td th:text="${emprunt.getExemplaire().getIdexp()}" />
+                <td th:text="${emprunt.getId().dateemp}" />
+
+                <td>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a th:href="@{/deleteemprunt(cin=${emprunt.adherant.cin},idex=${emprunt.getExemplaire().getIdexp()},date=${emprunt.getId().dateemp})}">Delete</a>
+
+                </td>
+            </tr>
+
+            </tbody>
+
+        </table>
+    </div>
+</div>
+</body>
+</html>

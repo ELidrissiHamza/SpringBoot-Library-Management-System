@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Adherents Management Application</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+</head>
+<body>
+<header>
+    <div th:replace="navbar::navbar"></div>
+</header>
+<div class="row">
+    <!-- <div class="alert alert-success" *ngIf='message'>{{message}}</div> -->
+
+    <div class="container">
+        <h3 class="text-center">List of Adherents</h3>
+        <hr>
+        <div class="container text-left">
+
+            <a href="#" class="btn btn-success" th:href="@{/newadherant}">Add New Adherent</a>
+            <div class="input-group mb-1 mt-3">
+                <form th:action="@{/retreaveadherant}" th:object="${adherant}" method="get">
+                    <div style="display: flex; flex-wrap: wrap;">
+                        <div style="flex: 1; padding-right: 10px;">
+                            <input autocomplete="off" type="text" id="cin" name="cin" class="form-control" th:value="${cin}" placeholder="Adherant CIN" aria-label="Recipient's username" aria-describedby="button-addon2" >
+                        </div>
+                        <div style="flex: 0 0 150px;">
+                            <button class="btn btn-outline-success" type="submit" id="button-addon2">Retrieve</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <br>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>CIN</th>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="adherant : ${adherants}">
+                <td th:text="${adherant.cin}" />
+                <td th:text="${adherant.nom}" />
+                <td th:text="${adherant.prenom}" />
+                <td>
+                    <a th:href="@{'/editadherant/' + ${adherant.cin}}">Edit</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a th:href="@{'/deleteadherant/' + ${adherant.cin}}">Delete</a>
+                </td>
+            </tr>
+
+            </tbody>
+
+        </table>
+    </div>
+</div>
+</body>
+</html>

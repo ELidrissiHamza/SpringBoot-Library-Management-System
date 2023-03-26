@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Books Management Application</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+</head>
+<body>
+<header>
+<div th:replace="navbar::navbar"></div>
+</header>
+<div class="row">
+    <!-- <div class="alert alert-success" *ngIf='message'>{{message}}</div> -->
+
+    <div class="container">
+        <h3 class="text-center">List of Books</h3>
+        <hr>
+        <div class="container text-left">
+
+            <a href="#" class="btn btn-success" th:href="@{/newbook}">Add New Book</a>
+            <div class="input-group mb-1 mt-3">
+                <form th:action="@{/retreave}" th:object="${livre}" method="get">
+                    <div style="display: flex; flex-wrap: wrap;">
+                        <div style="flex: 1; padding-right: 10px;">
+                            <input autocomplete="off" type="text" id="isbn" name="isbn" class="form-control" th:value="${isbn}" placeholder="LIVRE ISBN" aria-label="Recipient's username" aria-describedby="button-addon2" >
+                        </div>
+                        <div style="flex: 0 0 150px;">
+                            <button class="btn btn-outline-success" type="submit" id="button-addon2">Retrieve</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <br>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>ISBN</th>
+                <th>TITLE</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="livre : ${livres}">
+                <td th:text="${livre.isbn}" />
+                <td th:text="${livre.titre}" />
+                <td>
+                    <a th:href="@{'/edit/' + ${livre.isbn}}">Edit</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a th:href="@{'/delete/' + ${livre.isbn}}">Delete</a>
+                </td>
+            </tr>
+
+            </tbody>
+
+        </table>
+    </div>
+</div>
+</body>
+</html>

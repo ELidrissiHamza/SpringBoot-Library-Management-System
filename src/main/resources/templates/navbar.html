@@ -1,0 +1,17 @@
+<div th:fragment="navbar">
+<nav class="navbar navbar-expand-md navbar-dark" style="background-color: blue">
+  <div>
+    <a th:href="@{https://github.com/ELidrissiHamza}" class="navbar-brand"> Welcome </a>
+    <a th:href="@{/}" class="navbar-brand"> Books Management </a>
+    <a th:href="@{/AdherantList}" class="navbar-brand"> Adherents Management </a>
+  </div>
+  <a th:href="@{/EmpruntList}" class="navbar-brand"> Emprunts Management </a>
+  <ul class="navbar-nav ml-auto">
+    <li>
+      <form th:action="@{logout}" method="post" class="nav-link">
+        <input type="submit" value="logout" class="btn btn-primary">
+      </form>
+    </li>
+  </ul>
+</nav>
+</div>
